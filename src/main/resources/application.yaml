@@ -1,0 +1,25 @@
+
+
+#spring:
+##  h2:
+##    console.enabled: true
+#  datasource:
+#    #    url: jdbc:h2:file:/data/testdb
+#    url: jdbc:postgresql://localhost:5433/yugabyte?ApplicationName=Nishant_local&currentSchema=efdev01
+#    username: yugabyte
+#    password: yugabyte
+#    driverClassName: org.postgresql.Driver
+
+spring:
+  datasource:
+    hikari:
+      username: yugabyte
+      password: yugabyte
+      data-source-class-name: com.yugabyte.ysql.YBClusterAwareDataSource
+      maximumPoolSize: 10
+      data-source-properties:
+        serverName: 127.0.0.1
+        portNumber: 5433
+        databaseName: yugabyte
+#        additionalEndpoints: 127.0.0.2:5433,127.0.0.3:5433
+#        topologyKeys: "cloud1.datacenter1.rack1"
