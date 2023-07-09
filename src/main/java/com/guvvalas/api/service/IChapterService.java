@@ -28,4 +28,11 @@ public interface IChapterService{
      * @return
      */
     public Chapter getChapter(Integer chapterId);
+
+
+    /**
+     *
+     * @param chapterId
+     */
+    public void deleteChapter(Integer chapterId);
 }

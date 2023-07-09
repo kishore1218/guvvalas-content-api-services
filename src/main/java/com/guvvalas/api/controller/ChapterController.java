@@ -57,4 +57,23 @@ public class ChapterController {
         chapterService.saveChapter(chapter);
         return  ResponseEntity.ok(Mono.empty());
     }
+
+
+    /**
+     *
+     * @param chapterId
+     * @return
+     */
+    @DeleteMapping("/chapter/{chapterId}")
+    public ResponseEntity<Mono<Void>> deleteChapter(@PathVariable("chapterId") Integer chapterId){
+        log.info("getChapters--->");
+        var response=Mono.fromCallable(()-> {
+            chapterService.deleteChapter(chapterId);
+            return Mono.empty();
+        }).onErrorResume(ex->{
+            return Mono.error(ex);
+        });
+        return ResponseEntity.ok(Mono.empty());
+    }
+
 }

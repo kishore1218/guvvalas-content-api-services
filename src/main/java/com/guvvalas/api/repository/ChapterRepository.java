@@ -28,6 +28,8 @@ public class ChapterRepository {
 
     private static final String GET_ALL_CHAPTERS_SQL="SELECT *FROM CHAPTER";
 
+    private static final String DELETE_CHAPTER_SQL="DELETE FROM CHAPTER WHERE ID=:aChapterId";
+
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -45,6 +47,18 @@ public class ChapterRepository {
         params.put("courseId",chapter.getCourseId());
 
         jdbcTemplate.update(COURSE_INSERT_SQL,params);
+    }
+
+
+    /**
+     *
+     * @param chapterId
+     */
+    public void deleteChapter(Integer chapterId){
+
+        Map<String,Object> params=new HashMap<String,Object>();
+        params.put("aChapterId",chapterId);
+        jdbcTemplate.update(DELETE_CHAPTER_SQL,params);
     }
 
 

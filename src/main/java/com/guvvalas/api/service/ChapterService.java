@@ -39,4 +39,13 @@ public class ChapterService implements IChapterService{
     public Chapter getChapter(Integer chapterId) {
         return chapterRepository.getChapter(chapterId);
     }
+
+    /**
+     * @param chapterId
+     */
+    @Override
+    public void deleteChapter(Integer chapterId) {
+         chapterRepository.deleteChapter(chapterId);
+
+    }
 }
