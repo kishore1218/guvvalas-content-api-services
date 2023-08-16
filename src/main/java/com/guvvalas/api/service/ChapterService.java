@@ -24,11 +24,20 @@ public class ChapterService implements IChapterService{
     }
 
     /**
+     * @param chapterId
+     * @param content
+     */
+    @Override
+    public void saveChapterContent(Integer chapterId, String content) {
+        chapterRepository.saveChapterContent(chapterId,content);
+    }
+
+    /**
      * @return
      */
     @Override
-    public List<Chapter> getChapters() {
-        return chapterRepository.getChapters();
+    public List<Chapter> getChapters(Integer courseId) {
+        return chapterRepository.getChapters(courseId);
     }
 
     /**
@@ -37,7 +46,9 @@ public class ChapterService implements IChapterService{
      */
     @Override
     public Chapter getChapter(Integer chapterId) {
-        return chapterRepository.getChapter(chapterId);
+        var res= chapterRepository.getChapter(chapterId);
+        log.info("chapter--> {}",res);
+        return res;
     }
 
     /**

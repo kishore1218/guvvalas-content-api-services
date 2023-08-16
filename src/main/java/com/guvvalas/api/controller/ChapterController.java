@@ -23,10 +23,10 @@ public class ChapterController {
      *
      * @return
      */
-    @GetMapping("/chapters")
-    public ResponseEntity<Mono<List<Chapter>>> getChapters(){
+    @GetMapping("/chapters/{courseId}")
+    public ResponseEntity<Mono<List<Chapter>>> getChapters(@PathVariable("courseId") Integer courseId){
         log.info("getChapters--->");
-        var response=Mono.fromCallable(()-> chapterService.getChapters()).onErrorResume(ex->{
+        var response=Mono.fromCallable(()-> chapterService.getChapters(courseId)).onErrorResume(ex->{
             return Mono.error(ex);
         });
         return ResponseEntity.ok(response);
@@ -44,6 +44,13 @@ public class ChapterController {
             return Mono.error(ex);
         });
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/chapterContent/{chapterId}")
+    public ResponseEntity<Mono<Void>> saveChapterContent(@RequestBody String content,@PathVariable("chapterId") Integer chapterId){
+        log.info("saveChapterContent--->");
+        chapterService.saveChapterContent(chapterId,content);
+        return ResponseEntity.ok(Mono.empty());
     }
     /**
      *

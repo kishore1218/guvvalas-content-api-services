@@ -15,11 +15,19 @@ public interface IChapterService{
      */
     public void saveChapter(Chapter chapter);
 
+
+    /**
+     *
+     * @param chapterId
+     * @param content
+     */
+    public void saveChapterContent(Integer chapterId,String content);
+
     /**
      *
      * @return
      */
-    public List<Chapter> getChapters();
+    public List<Chapter> getChapters(Integer courseId);
 
 
     /**

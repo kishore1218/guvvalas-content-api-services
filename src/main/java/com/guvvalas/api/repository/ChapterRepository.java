@@ -26,9 +26,11 @@ public class ChapterRepository {
 
     private static final String GET_CHAPTER_SQL= "SELECT *FROM CHAPTER WHERE ID=:aChapterId";
 
-    private static final String GET_ALL_CHAPTERS_SQL="SELECT *FROM CHAPTER";
 
+    private static final String GET_ALL_CHAPTERS_SQL="SELECT *FROM CHAPTER WHERE COURSE_ID=:aCourseId order by seq" ;
     private static final String DELETE_CHAPTER_SQL="DELETE FROM CHAPTER WHERE ID=:aChapterId";
+
+    private static final String UPDATE_CHAPTER_CONTENT_SQL="UPDATE CHAPTER SET CHAPTER_CONTENT=:content WHERE ID=:aChapterId";
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -53,6 +55,20 @@ public class ChapterRepository {
     /**
      *
      * @param chapterId
+     * @param content
+     */
+    public void saveChapterContent(Integer chapterId,String content){
+
+        Map<String,Object> params=new HashMap<String,Object>();
+        params.put("content",content);
+        params.put("aChapterId",chapterId);
+        jdbcTemplate.update(UPDATE_CHAPTER_CONTENT_SQL,params);
+    }
+
+
+    /**
+     *
+     * @param chapterId
      */
     public void deleteChapter(Integer chapterId){
 
@@ -66,9 +82,9 @@ public class ChapterRepository {
      *
      * @return
      */
-    public List<Chapter> getChapters(){
+    public List<Chapter> getChapters(Integer courseId){
         Map<String,Object> params=new HashMap<String,Object>();
-
+        params.put("aCourseId",courseId);
         return jdbcTemplate.query(GET_ALL_CHAPTERS_SQL, params, new RowMapper<Chapter>() {
 
             /**
