@@ -61,7 +61,11 @@ public class ChapterController {
     public ResponseEntity<Mono<Void>> chapter(@RequestBody Chapter chapter){
 
         log.info("chapter--->");
-        chapterService.saveChapter(chapter);
+        if(chapter.getId()!=null && chapter.getId()>0){
+            chapterService.updateChapter(chapter);
+        }else{
+            chapterService.saveChapter(chapter);
+        }
         return  ResponseEntity.ok(Mono.empty());
     }
 

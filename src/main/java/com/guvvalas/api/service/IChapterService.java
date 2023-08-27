@@ -18,6 +18,13 @@ public interface IChapterService{
 
     /**
      *
+     * @param chapter
+     */
+    public void updateChapter(Chapter chapter);
+
+
+    /**
+     *
      * @param chapterId
      * @param content
      */

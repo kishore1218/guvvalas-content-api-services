@@ -60,7 +60,11 @@ public class CoursesController {
      */
     @PostMapping("/course")
     public ResponseEntity<Mono<Void>> course(@RequestBody Course course){
-        courseService.saveCourse(course);
+        if(course.getCourseId()==null){
+            courseService.saveCourse(course);
+        }else{
+            courseService.updateCourse(course);
+        }
         return  ResponseEntity.ok(Mono.empty());
     }
 

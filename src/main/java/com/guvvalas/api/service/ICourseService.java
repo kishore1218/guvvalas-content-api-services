@@ -30,4 +30,10 @@ public interface ICourseService {
      */
     public void saveCourse(Course course);
 
+    /**
+     *
+     * @param course
+     */
+    public void updateCourse(Course course);
+
 }

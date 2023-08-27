@@ -32,6 +32,9 @@ public class ChapterRepository {
 
     private static final String UPDATE_CHAPTER_CONTENT_SQL="UPDATE CHAPTER SET CHAPTER_CONTENT=:content WHERE ID=:aChapterId";
 
+    private static final String UPDATE_CHAPTER_SQL="UPDATE CHAPTER SET CHAPTER_NAME=:aChapterName,DESCRIPTION=:DESCRIPTION,SEQ=:seq,CHAPTER_CONTENT=:content WHERE ID=:aChapterId";
+
+
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -49,6 +52,23 @@ public class ChapterRepository {
         params.put("courseId",chapter.getCourseId());
 
         jdbcTemplate.update(COURSE_INSERT_SQL,params);
+    }
+
+
+    /**
+     *
+     * @param chapter
+     */
+    public void updateChapter(Chapter chapter){
+
+        Map<String,Object> params=new HashMap<String,Object>();
+        params.put("aChapterName",chapter.getName());
+        params.put("description",chapter.getDescription());
+        params.put("seq",chapter.getSequence());
+        params.put("content",chapter.getContent());
+        params.put("courseId",chapter.getCourseId());
+
+        jdbcTemplate.update(UPDATE_CHAPTER_SQL,params);
     }
 
 
@@ -121,7 +141,7 @@ public class ChapterRepository {
         Map<String,Object> params=new HashMap<String,Object>();
         params.put("aChapterId",chapterId);
 
-        return jdbcTemplate.queryForObject(GET_ALL_CHAPTERS_SQL, params, new RowMapper<Chapter>() {
+        return jdbcTemplate.queryForObject(GET_CHAPTER_SQL, params, new RowMapper<Chapter>() {
 
             /**
              *

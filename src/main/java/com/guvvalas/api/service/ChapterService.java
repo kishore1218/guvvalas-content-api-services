@@ -24,6 +24,15 @@ public class ChapterService implements IChapterService{
     }
 
     /**
+     *
+     * @param chapter
+     */
+    @Override
+    public void updateChapter(Chapter chapter) {
+        chapterRepository.updateChapter(chapter);
+    }
+
+    /**
      * @param chapterId
      * @param content
      */
@@ -31,6 +40,7 @@ public class ChapterService implements IChapterService{
     public void saveChapterContent(Integer chapterId, String content) {
         chapterRepository.saveChapterContent(chapterId,content);
     }
+
 
     /**
      * @return

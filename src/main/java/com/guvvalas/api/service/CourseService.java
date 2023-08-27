@@ -45,4 +45,12 @@ public class CourseService implements ICourseService {
     public void saveCourse(Course course) {
         courseRepository.saveCourse(course);
     }
+
+    /**
+     * @param course
+     */
+    @Override
+    public void updateCourse(Course course) {
+        courseRepository.updateCourse(course);
+    }
 }

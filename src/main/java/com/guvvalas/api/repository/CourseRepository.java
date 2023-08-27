@@ -27,11 +27,13 @@ public class CourseRepository {
 
     private static final String QUERY="select *from imps_txn where tnx_id=:atnxId";
 
-    private static final String COURSE_INSERT="INSERT INTO COURSE(COURSE_NAME,DESCRIPTION,LOGO_PATH,URL,IS_ACTIVE) VALUES(:aCourseName,:description,:logo,:url,:isActive)";
+    private static final String COURSE_INSERT="INSERT INTO COURSE(COURSE_NAME,DESCRIPTION,LOGO_PATH,URL,IS_ACTIVE,IS_PUBLISH) VALUES(:aCourseName,:description,:logo,:url,:isActive,:isPublish)";
 
-    private static final String GET_COURSE_BY_ID ="SELECT *FROM COURSE WHERE ID=:courseId";
+    private static final String GET_COURSE_BY_ID ="SELECT *FROM COURSE WHERE ID=:courseId ";
 
-    private static final String GET_ALL_COURSES ="SELECT *FROM COURSE";
+    private static final String GET_ALL_COURSES ="SELECT *FROM COURSE order by COURSE_NAME";
+
+    private static final String UPDATE_COURSE="UPDATE COURSE SET COURSE_NAME=:courseName,DESCRIPTION=:desc,LOGO_PATH=:logo,URL=:url,IS_PUBLISH:ispublish WHERE ID=:courseId";
 
 
     /**
@@ -115,8 +117,23 @@ public class CourseRepository {
         params.put("logo",course.getIcon());
         params.put("description",course.getDescription());
         params.put("isActive",course.getIsActive());
+        params.put("isPublish",course.getIsPublish());
 
        var res= jdbcTemplate.update(COURSE_INSERT,params);
+
+    }
+
+    public void updateCourse(Course course){
+
+        Map<String,Object> params=new HashMap<String,Object>();
+        params.put("aCourseName",course.getName());
+        params.put("url",course.getUrl());
+        params.put("logo",course.getIcon());
+        params.put("desc",course.getDescription());
+        params.put("isActive",course.getIsActive());
+        params.put("courseId",course.getCourseId());
+
+        var res= jdbcTemplate.update(UPDATE_COURSE,params);
 
     }
 }
