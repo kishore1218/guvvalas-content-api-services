@@ -22,7 +22,7 @@ import java.util.Map;
 public class ChapterRepository {
 
 
-    private static final String COURSE_INSERT_SQL="INSERT INTO CHAPTER(CHAPTER_NAME,DESCRIPTION,SEQ,COURSE_ID,CHAPTER_CONTENT) VALUES(:aChapterName,:description,:seq,:courseId,:content)";
+    private static final String COURSE_INSERT_SQL="INSERT INTO CHAPTER(CHAPTER_NAME,DESCRIPTION,SEQ,COURSE_ID,CHAPTER_CONTENT,IS_PUBLISH) VALUES(:aChapterName,:description,:seq,:courseId,:content,:isPublish)";
 
     private static final String GET_CHAPTER_SQL= "SELECT *FROM CHAPTER WHERE ID=:aChapterId";
 
@@ -32,7 +32,7 @@ public class ChapterRepository {
 
     private static final String UPDATE_CHAPTER_CONTENT_SQL="UPDATE CHAPTER SET CHAPTER_CONTENT=:content WHERE ID=:aChapterId";
 
-    private static final String UPDATE_CHAPTER_SQL="UPDATE CHAPTER SET CHAPTER_NAME=:aChapterName,DESCRIPTION=:DESCRIPTION,SEQ=:seq,CHAPTER_CONTENT=:content WHERE ID=:aChapterId";
+    private static final String UPDATE_CHAPTER_SQL="UPDATE CHAPTER SET CHAPTER_NAME=:aChapterName,DESCRIPTION=:DESCRIPTION,SEQ=:seq,CHAPTER_CONTENT=:content,IS_PUBLISH=:isPublish WHERE ID=:aChapterId";
 
 
     @Autowired
@@ -50,6 +50,7 @@ public class ChapterRepository {
         params.put("seq",chapter.getSequence());
         params.put("content",chapter.getContent());
         params.put("courseId",chapter.getCourseId());
+        params.put("isPublish",chapter.getIsPublish());
 
         jdbcTemplate.update(COURSE_INSERT_SQL,params);
     }
@@ -67,6 +68,7 @@ public class ChapterRepository {
         params.put("seq",chapter.getSequence());
         params.put("content",chapter.getContent());
         params.put("courseId",chapter.getCourseId());
+        params.put("isPublish",chapter.getIsPublish());
 
         jdbcTemplate.update(UPDATE_CHAPTER_SQL,params);
     }

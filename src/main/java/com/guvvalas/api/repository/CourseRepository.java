@@ -132,7 +132,8 @@ public class CourseRepository {
         params.put("desc",course.getDescription());
         params.put("isActive",course.getIsActive());
         params.put("courseId",course.getCourseId());
-
+        params.put("isPublish",course.getIsPublish());
+        
         var res= jdbcTemplate.update(UPDATE_COURSE,params);
 
     }
