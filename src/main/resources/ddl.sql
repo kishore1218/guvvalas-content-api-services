@@ -6,7 +6,7 @@ create table COURSE(
 	LOGO_PATH varchar(500),
 	IS_ACTIVE BOOLEAN default false,
 	IS_PUBLISH BOOLEAN default FALSE
-)
+);
 
 create table CHAPTER(
 	ID SERIAL primary key,
