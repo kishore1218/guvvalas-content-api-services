@@ -19,17 +19,17 @@ import java.util.Properties;
 public class AppConfig {
 
 
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.hikari")
-    public HikariConfig hikariConfig() {
-        return new HikariConfig();
-    }
-
-    @Bean
-    @Primary
-    public DataSource dataSource() {
-        return new HikariDataSource(hikariConfig());
-    }
+//    @Bean
+//    @ConfigurationProperties(prefix = "spring.datasource.hikari")
+//    public HikariConfig hikariConfig() {
+//        return new HikariConfig();
+//    }
+//
+//    @Bean
+//    @Primary
+//    public DataSource dataSource() {
+//        return new HikariDataSource(hikariConfig());
+//    }
 
 //    @Bean
 //    public DataSource dataSource(){
