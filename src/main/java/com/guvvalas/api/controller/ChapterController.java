@@ -46,6 +46,20 @@ public class ChapterController {
         return ResponseEntity.ok(response);
     }
 
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping("course/{courseId}/{chapterCode}")
+    public ResponseEntity<Mono<Chapter>> getCourseChapter(@PathVariable("chapterCode") Integer chapterCode){
+        log.info("getChapters--->");
+        var response=Mono.fromCallable(()-> chapterService.getChapter(chapterCode)).onErrorResume(ex->{
+            return Mono.error(ex);
+        });
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping("/chapterContent/{chapterId}")
     public ResponseEntity<Mono<Void>> saveChapterContent(@RequestBody String content,@PathVariable("chapterId") Integer chapterId){
         log.info("saveChapterContent--->");
