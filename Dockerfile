@@ -6,6 +6,5 @@ FROM openjdk:17-oracle
 #RUN microdnf update --nodocs -y
 #RUN microdnf clean all
 
-
-COPY build/libs/guvvalas-content-api-services-0.0.1-SNAPSHOT.jar ../../guvvalas-content-api-services-0.0.1-SNAPSHOT.jar
+COPY /tmp/build/inputs/build/libs/guvvalas-content-api-services-0.0.1-SNAPSHOT.jar ../../guvvalas-content-api-services-0.0.1-SNAPSHOT.jar
 ENTRYPOINT ["java","-jar","/guvvalas-content-api-services-0.0.1-SNAPSHOT.jar"]
